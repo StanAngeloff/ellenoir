@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+/* vi: set ft=javascript sw=2 ts=2 et :*/
+
+var http = require('http'),
+    path = require('path');
+
+// Set up command-line options.
+var options = require('optimist')
+  .usage('Usage:\n  $0 [...OPTIONS]')
+  .wrap(78)
+  .option('ip', {
+    alias: ['i'],
+    'default': '0.0.0.0',
+    demand: true,
+    describe: 'The IP address for the web server.'
+  })
+  .option('port', {
+    alias: ['p'],
+    'default': 3030,
+    demand: true,
+    describe: 'The port on the specified IP address for the web server.'
+  })
+  .option('public', {
+    'default': path.resolve(__dirname + '/../public'),
+    demand: true,
+    describe: 'The absolute path to the directory containing the public web server files.'
+  })
+  .option('verbose', {
+    alias: ['V'],
+    describe: 'Use verbose logging.'
+  })
+  .option('help', {
+    alias: ['h'],
+    describe: 'Print command usage and exit.'
+  })
+;
+
+// If '-h'elp was requested, print usage and options.
+if (options.argv.help) {
+  console.log(options.help());
+  process.exit(0);
+}
+
+var express  = require('express'),
+    ellenoir = require('../ellenoir');
+
+var app = express(),
+    server = http.createServer(app);
+
+app.use(express['static'](options.argv['public']));
+
+// The IP and port can also be specified as first and second arguments.
+var port = (options.argv._[1] || options.argv.port);
+var ip = (options.argv._[0] || options.argv.ip);
+
+server.listen(port, ip);
+ellenoir(app, { server: server });
+
+if (options.argv.verbose) {
+  console.log('%s is listening on %s:%s... Press <Ctrl-C> to quit.', options.argv.$0, ip, port);
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+
+<meta charset=utf-8>
+
+<title>Ellenoir</title>
+
+<script src=//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js></script>
+<link rel=stylesheet href=ellenoir.css>
+
+</head>
+<body>
+
+<div id=local>
+  <video class=camera autoplay></video>
+</div>
+
+<div id=remote class="remote collapsed">
+  <video class=camera autoplay></video>
+</div>
+
+<script src=//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js></script>
+
+<script src=webrtc.io.js></script>
+<script src=ellenoir-default.js></script>
+
+<script>
+Ellenoir({
+  localCameraElement: '#local .camera',
+  cloneElement: '#remote',
+  remoteCameraElement: '.camera',
+  room: 'default'
+});
+</script>
+
+</body>
+</html>

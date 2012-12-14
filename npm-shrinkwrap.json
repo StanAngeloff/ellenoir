@@ -1,0 +1,134 @@
+{
+  "name": "ellenoir",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": {
+      "version": "3.0.4",
+      "dependencies": {
+        "connect": {
+          "version": "2.7.1",
+          "dependencies": {
+            "qs": {
+              "version": "0.5.1"
+            },
+            "formidable": {
+              "version": "1.0.11"
+            },
+            "crc": {
+              "version": "0.2.0"
+            },
+            "bytes": {
+              "version": "0.1.0"
+            },
+            "pause": {
+              "version": "0.0.1"
+            }
+          }
+        },
+        "commander": {
+          "version": "0.6.1"
+        },
+        "range-parser": {
+          "version": "0.0.4"
+        },
+        "mkdirp": {
+          "version": "0.3.3"
+        },
+        "cookie": {
+          "version": "0.0.5"
+        },
+        "buffer-crc32": {
+          "version": "0.1.1"
+        },
+        "fresh": {
+          "version": "0.1.0"
+        },
+        "methods": {
+          "version": "0.0.1"
+        },
+        "send": {
+          "version": "0.1.0",
+          "dependencies": {
+            "mime": {
+              "version": "1.2.6"
+            }
+          }
+        },
+        "cookie-signature": {
+          "version": "0.0.1"
+        },
+        "debug": {
+          "version": "0.7.0"
+        }
+      }
+    },
+    "optimist": {
+      "version": "0.3.5",
+      "dependencies": {
+        "wordwrap": {
+          "version": "0.0.2"
+        }
+      }
+    },
+    "webrtc.io": {
+      "version": "0.0.2-3"
+    },
+    "webrtc.io-client": {
+      "version": "0.0.2-3"
+    },
+    "ws": {
+      "version": "0.4.24",
+      "dependencies": {
+        "commander": {
+          "version": "0.6.1"
+        },
+        "tinycolor": {
+          "version": "0.0.1"
+        },
+        "options": {
+          "version": "0.0.3"
+        }
+      }
+    },
+    "jshint": {
+      "version": "0.9.1",
+      "dependencies": {
+        "cli": {
+          "version": "0.4.3",
+          "dependencies": {
+            "glob": {
+              "version": "3.1.14",
+              "dependencies": {
+                "minimatch": {
+                  "version": "0.2.9",
+                  "dependencies": {
+                    "lru-cache": {
+                      "version": "2.0.4"
+                    },
+                    "sigmund": {
+                      "version": "1.0.0"
+                    }
+                  }
+                },
+                "graceful-fs": {
+                  "version": "1.1.14"
+                },
+                "inherits": {
+                  "version": "1.0.0"
+                }
+              }
+            }
+          }
+        },
+        "minimatch": {
+          "version": "0.0.5",
+          "dependencies": {
+            "lru-cache": {
+              "version": "1.0.6"
+            }
+          }
+        }
+      }
+    }
+  }
+}
