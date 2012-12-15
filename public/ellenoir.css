@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 /* Establish a consistent font family across all elements. */
@@ -11,12 +12,18 @@ input, button, select, textarea,
   font-family: 'PT Sans', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', tahoma, verdana, arial, sans-serif;
 }
 
+.navbar-static-top {
+  position: relative;
+  z-index: 20;
+}
+
 .wall {
   position: absolute;
-  top: 0;
+  top: 41px; /* 40px height + 1px border-bottom */
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 10;
 }
 
 .camera {

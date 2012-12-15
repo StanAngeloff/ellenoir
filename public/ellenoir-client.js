@@ -62,6 +62,6 @@ Client.prototype.connect = function(options) {
 
 this.Client = Client;
 
-}).call(this.Ellenoir = (this.Ellenoir || {}));
+}).call(this.Ellenoir);
 
 }

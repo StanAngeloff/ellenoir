@@ -120,4 +120,4 @@ Wall.prototype._autoSwitch = function() {
 
 this.Wall = Wall;
 
-}).call(this.Ellenoir = (this.Ellenoir || {}));
+}).call(this.Ellenoir);
