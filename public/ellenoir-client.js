@@ -1,17 +1,14 @@
 /*global $, PeerConnection, rtc */
 /*jshint browser: true */
 
+// Make sure the WebRTC.io library was included.
 if (typeof rtc === 'undefined') {
   window.alert('Whoops! The application cannot start due to missing features.\n\nPlease contact support for assistance.');
-  return false;
-}
-
 // Make sure the browser used has PeerConnection capabilities.
 // WebRTC.io should have taken care of property browser vendoring.
-if (typeof PeerConnection === 'undefined') {
+} else if (typeof PeerConnection === 'undefined') {
   window.alert('Whoops! You are using software which does not support the features required for this application to run.\n\nPlease download and install a copy of Google Chrome to continue.');
-  return false;
-}
+} else {
 
 (function() {
 
@@ -75,3 +72,5 @@ if (typeof module === 'undefined') {
 }
 
 }).call(this);
+
+}
