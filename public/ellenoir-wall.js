@@ -14,11 +14,11 @@ WallEntity.prototype = {
 
   isLocal:   function() { return this.is('local'); },
   isRemote:  function() { return ( ! this.isLocal()); },
-  isHidden:  function() { return this.withElement('hasClass', 'collapsed'); },
+  isHidden:  function() { return this.withElement('hasClass', 'hide'); },
   isShowing: function() { return ( ! this.isHidden()); },
 
-  hide: function() { return this.withElement('addClass', 'collapsed'); },
-  show: function() { return this.withElement('removeClass', 'collapsed'); },
+  hide: function() { return this.withElement('addClass', 'hide'); },
+  show: function() { return this.withElement('removeClass', 'hide'); },
 
   withElement: function() {
     if (this.$element) {

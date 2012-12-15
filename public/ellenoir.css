@@ -4,9 +4,11 @@ html, body {
   height: 100%;
 }
 
-.collapsed {
-  display: none;
-  visibility: hidden;
+/* Establish a consistent font family across all elements. */
+body,
+input, button, select, textarea,
+.navbar-search .search-query {
+  font-family: 'PT Sans', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', tahoma, verdana, arial, sans-serif;
 }
 
 .wall {
