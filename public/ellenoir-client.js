@@ -1,4 +1,4 @@
-/*global $, PeerConnection, rtc */
+/*global PeerConnection, rtc */
 /*jshint browser: true */
 
 // Make sure the WebRTC.io library was included.
@@ -14,17 +14,17 @@ if (typeof rtc === 'undefined') {
 
 'use strict';
 
-function Ellenoir(options) {
+function Client(options) {
   // Check if the constructor was called without 'new'.
-  if ( ! (this instanceof Ellenoir)) {
-    return new Ellenoir(options);
+  if ( ! (this instanceof Client)) {
+    return new Client(options);
   }
   options = (options || {});
   this.requestLocalStreams(options);
   this.connect(options);
 }
 
-Ellenoir.prototype.requestLocalStreams = function(options) {
+Client.prototype.requestLocalStreams = function(options) {
   var acquire = {
     audio: ('audio' in options ? options.audio : true),
     video: ('video' in options ? options.video : true)
@@ -32,34 +32,36 @@ Ellenoir.prototype.requestLocalStreams = function(options) {
   console.debug('Acquiring streams %s...', JSON.stringify(acquire));
   rtc.createStream(acquire, function(stream) {
     console.info('Local media streams acquired successfully.');
-    $(options.localElement || 'video').attr('src', window.URL.createObjectURL(stream));
+    if (typeof options.attachLocalStream === 'function') {
+      options.attachLocalStream.call(options, window.URL.createObjectURL(stream));
+    }
   }, function() {
     console.error('Failed to acquire local media streams.');
     window.alert('Whoops! The application failed to acquire audio/video. Please restart the application, grant access and try again.');
   });
 };
 
-Ellenoir.prototype.connect = function(options) {
+Client.prototype.connect = function(options) {
   var idNamespace = 'remote-stream-socket-', server;
   server = (options.protocol || (window.location.protocol.replace(/^http/, 'ws'))) + '://' + (options.server || window.location.hostname) + ':' + (options.port || window.location.port || 80) + '/';
   console.debug('Connecting to "%s" in room "%s"...', server, options.room);
   rtc.connect(server, options.room);
   rtc.on('add remote stream', function(stream, socketId) {
     console.debug('Remote stream "%s" added to room.', socketId);
-    options.cloneFactory((idNamespace + socketId), options).attr('src', window.URL.createObjectURL(stream));
+    if (typeof options.attachRemoteStream === 'function') {
+      options.attachRemoteStream.call(options, window.URL.createObjectURL(stream), idNamespace + socketId);
+    }
   });
   rtc.on('disconnect stream', function(socketId) {
     console.debug('Remote stream "%s" left the room.', socketId);
-    $('#' + idNamespace + socketId).remove();
+    if (typeof options.detachRemoteStream === 'function') {
+      options.detachRemoteStream.call(options, idNamespace + socketId);
+    }
   });
 };
 
-if (typeof module === 'undefined') {
-  this.Ellenoir = Ellenoir;
-} else {
-  module.exports = Ellenoir;
-}
+this.Client = Client;
 
-}).call(this);
+}).call(this.Ellenoir = (this.Ellenoir || {}));
 
 }

@@ -12,32 +12,31 @@
 </head>
 <body>
 
-<div id=local>
-  <video class=camera autoplay></video>
-</div>
+<section id=walls>
+  <article id=local class=wall>
+    <video class=camera autoplay></video>
+  </article>
 
-<div id=remote class="remote collapsed">
-  <video class=camera autoplay></video>
-</div>
+  <article id=remote class="wall remote collapsed">
+    <video class=camera autoplay></video>
+  </article>
+</section>
 
 <script src=//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js></script>
 
 <script src=webrtc.io.js></script>
 <script src=ellenoir-client.js></script>
+<script src=ellenoir-wall.js></script>
 
 <script>
-Ellenoir({
+Ellenoir.Client($.extend({
   room: 'default',
-  audio: false,
-  localElement: '#local .camera',
-  remoteElement: '#remote',
-  cloneFactory: function(id, options) {
-    var $original = $('#remote'), $clone;
-    $clone = $original.clone().attr('id', id).removeClass('collapsed');
-    $original.after($clone);
-    return $clone.find('.camera');
-  }
-});
+  audio: false
+}, Ellenoir.Wall({
+  localQuery: '#local',
+  remoteQuery: '#remote',
+  cameraQuery: '.camera'
+})));
 </script>
 
 </body>
