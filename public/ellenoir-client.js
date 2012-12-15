@@ -32,7 +32,7 @@ Ellenoir.prototype.requestLocalStreams = function(options) {
   console.debug('Acquiring streams %s...', JSON.stringify(acquire));
   rtc.createStream(acquire, function(stream) {
     console.info('Local media streams acquired successfully.');
-    $(options.localCameraElement || 'video').attr('src', window.URL.createObjectURL(stream));
+    $(options.localElement || 'video').attr('src', window.URL.createObjectURL(stream));
   }, function() {
     console.error('Failed to acquire local media streams.');
     window.alert('Whoops! The application failed to acquire audio/video. Please restart the application, grant access and try again.');
@@ -45,19 +45,7 @@ Ellenoir.prototype.connect = function(options) {
   rtc.connect('ws://' + (options.server || window.location.hostname) + ':' + (options.port || window.location.port || 80) + '/', options.room);
   rtc.on('add remote stream', function(stream, socketId) {
     console.debug('Remote stream "%s" added to room.', socketId);
-    var $original, $video, $clone;
-    if (options.cloneElement) {
-      $original = $(options.cloneElement);
-      $clone = $original.clone();
-      $video = $clone.find(options.remoteCameraElement || options.localCameraElement || 'video');
-    } else {
-      $original = $video = $(options.remoteCameraElement || options.localCameraElement || 'video');
-      $clone = $original.clone();
-    }
-    $clone.attr('id', (idNamespace + socketId));
-    $original.after($clone);
-    $clone.removeClass('collapsed');
-    $video.attr('src', window.URL.createObjectURL(stream));
+    options.cloneFactory((idNamespace + socketId), options).attr('src', window.URL.createObjectURL(stream));
   });
   rtc.on('disconnect stream', function(socketId) {
     console.debug('Remote stream "%s" left the room.', socketId);

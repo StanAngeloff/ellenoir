@@ -27,10 +27,15 @@
 
 <script>
 Ellenoir({
-  localCameraElement: '#local .camera',
-  cloneElement: '#remote',
-  remoteCameraElement: '.camera',
-  room: 'default'
+  room: 'default',
+  localElement: '#local .camera',
+  remoteElement: '#remote',
+  cloneFactory: function(id, options) {
+    var $original = $('#remote'), $clone;
+    $clone = $original.clone().attr('id', id).removeClass('collapsed');
+    $original.after($clone);
+    return $clone.find('.camera');
+  }
 });
 </script>
 
