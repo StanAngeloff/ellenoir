@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-/* vi: set ft=javascript sw=2 ts=2 et :*/
-
 var http = require('http'),
     path = require('path');
 
