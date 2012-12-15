@@ -40,9 +40,10 @@ Ellenoir.prototype.requestLocalStreams = function(options) {
 };
 
 Ellenoir.prototype.connect = function(options) {
-  var idNamespace = 'remote-stream-socket-';
-  console.debug('Connecting to "%s" in room "%s"...', ('ws://' + (options.server || window.location.hostname) + ':' + (options.port || window.location.port || 80) + '/'), options.room);
-  rtc.connect('ws://' + (options.server || window.location.hostname) + ':' + (options.port || window.location.port || 80) + '/', options.room);
+  var idNamespace = 'remote-stream-socket-', server;
+  server = (options.protocol || (window.location.protocol.replace(/^http/, 'ws'))) + '://' + (options.server || window.location.hostname) + ':' + (options.port || window.location.port || 80) + '/';
+  console.debug('Connecting to "%s" in room "%s"...', server, options.room);
+  rtc.connect(server, options.room);
   rtc.on('add remote stream', function(stream, socketId) {
     console.debug('Remote stream "%s" added to room.', socketId);
     options.cloneFactory((idNamespace + socketId), options).attr('src', window.URL.createObjectURL(stream));

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-var http = require('http'),
+var fs = require('fs'),
+    https = require('https'),
     path = require('path');
 
 // Set up command-line options.
@@ -24,6 +25,18 @@ var options = require('optimist')
     demand: true,
     describe: 'The absolute path to the directory containing the public web server files.'
   })
+  .option('key-file', {
+    alias: ['key', 'K'],
+    'default': path.resolve(__dirname + '/../private/server.key'),
+    demand: true,
+    describe: 'The absolute path to the HTTPS server key.'
+  })
+  .option('certificate-file', {
+    alias: ['certificate', 'C'],
+    'default': path.resolve(__dirname + '/../private/server.crt'),
+    demand: true,
+    describe: 'The absolute path to the HTTPS server certificate.'
+  })
   .option('verbose', {
     alias: ['V'],
     describe: 'Use verbose logging.'
@@ -44,7 +57,10 @@ var express  = require('express'),
     ellenoir = require('../ellenoir');
 
 var app = express(),
-    server = http.createServer(app);
+    server = https.createServer({
+      key: fs.readFileSync(options.argv['key-file']),
+      cert: fs.readFileSync(options.argv['certificate-file'])
+    }, app);
 
 app.use(express['static'](options.argv['public']));
 
