@@ -1,5 +1,5 @@
 @video-local-background-color: #fff;
-@video-local-border-color: #888;
+@video-local-border-color: rgba(0, 0, 0, 0.5);
 
 #widget-video {
 
@@ -35,7 +35,7 @@
   .local {
     background-color: @video-local-background-color;
     position: absolute;
-    border: 1px solid @video-local-border-color;
+    box-shadow: 0 0 4px @video-local-border-color;
     max-width: 20%;
     max-height: 40%;
   }
