@@ -24,6 +24,15 @@
 </head>
 <body>
 
+<section id=app>
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class=navbar-inner>
+      <div class=container>
+        <span class=brand>Ellenoir</span>
+      </div>
+    </div>
+  </div>
+
   {{#each widgets}}
     <article id="widget-{{module}}" class=ellenoir-widget data-module="{{module}}">
 
@@ -31,6 +40,9 @@
 
     </article>
   {{/each}}
+
+</section>
+
 <!-- Dependencies from various CDNs
      ============================== -->
 
