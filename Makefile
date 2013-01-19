@@ -49,11 +49,11 @@ $(SERVER_CERT_FILE).key $(SERVER_CERT_FILE).crt:
 			-subj "/C=$(SERVER_CERT_COUNTRY)/ST=$(SERVER_CERT_COUNTY)/L=$(SERVER_CERT_CITY)/CN=$$CN" 2>/dev/null
 	@echo 'Done, created "$(SERVER_CERT_FILE).{key,crt}".'
 
-NODEJS_DEPENDENCIES := $(call extract-dependencies,'$(CURDIR)/package.json','$(CURDIR)/node_modules/')
+NODEJS_DEPENDENCIES := $(foreach package_file,$(shell find '$(CURDIR)' '$(CURDIR)/app/modules/'* -maxdepth 1 -type f -name 'package.json'),$(call extract-dependencies,'$(package_file)','$(shell dirname '$(package_file)')/node_modules/'))
 install-nodejs-dependencies: $(NODEJS_DEPENDENCIES)
 $(NODEJS_DEPENDENCIES):
 	@$(call required-dependency,npm,Node.js)
-	@npm install
+	@( cd '$(shell dirname '$(shell dirname '$@')')' && npm install )
 
 install-development: install-nodejs-dependencies
 

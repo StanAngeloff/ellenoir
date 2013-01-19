@@ -29,9 +29,7 @@
     "consolidate": "~0.7",
     "express": "~3.0",
     "handlebars": "~1.0",
-    "optimist": "~0.3",
-    "webrtc.io": "~0.0",
-    "ws": "~0.4"
+    "optimist": "~0.3"
   },
   "devDependencies": {
     "jshint": "~0.9",

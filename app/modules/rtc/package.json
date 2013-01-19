@@ -1,0 +1,8 @@
+{
+  "name": "ellenoir-module-rtc",
+  "version": "0.1.0",
+  "dependencies": {
+    "webrtc.io": "~0.0",
+    "ws": "~0.4"
+  }
+}
