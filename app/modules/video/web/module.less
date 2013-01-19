@@ -3,6 +3,30 @@
 
 #widget-video {
 
+  .wall {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    -webkit-justify-content: center;
+
+    &[data-children="2"],
+    &[data-children="3"],
+    &[data-children="4"],
+    &[data-children="5"],
+    &[data-children="6"],
+    &[data-children="7"],
+    &[data-children="8"] {
+      -webkit-flex-wrap: wrap;
+    }
+
+    &[data-children="2"] .remote { width: 50%; }
+    &[data-children="3"] .remote { width: 33.3333%; }
+    &[data-children="4"] .remote { width: 50%; height: 50%; }
+    &[data-children="5"] .remote { width: 33.3333%; height: 50%; }
+    &[data-children="6"] .remote { width: 33.3333%; height: 50%; }
+    &[data-children="7"] .remote { width: 33.3333%; height: 33.3333%; }
+    &[data-children="8"] .remote { width: 25%; height: 50%; }
+  }
+
   .remote {
     width: 100%;
     height: 100%;

@@ -15,23 +15,27 @@ function updateLocalStreams(context) {
   ellenoir.$widget('video').find('.local').attr('src', context);
 }
 
-var $default, attachedIds = [];
+var $widget = ellenoir.$widget('video'),
+    $default = $widget.find('.default'),
+    $wall = $widget.find('.wall'),
+    attachedIds = [];
+
+function updateWall() {
+  $wall.attr({ 'data-children': attachedIds.length });
+}
 
 function attachRemoteStream(context, id) {
   // Check if a stream with the same ID is already attached.
   if (_.contains(attachedIds, id)) {
     return false;
   }
-  // If this is the first time a remote stream is added, find the default video element.
-  if ( ! $default) {
-    $default = ellenoir.$widget('video').find('.default');
-  }
   var $clone = $default.clone().removeClass('default').attr({ id: id });
   $clone.attr('src', context);
-  // Inject the cloned element after the default element and collapse the latter.
-  $default.after($clone.removeClass('collapsed')).addClass('collapsed');
+  // Inject the cloned element before the default element and collapse the latter.
+  $default.before($clone.removeClass('collapsed')).addClass('collapsed');
   // Register the stream ID.
   attachedIds.push(id);
+  updateWall();
 }
 
 function detachRemoteStream(id) {
@@ -43,8 +47,9 @@ function detachRemoteStream(id) {
   $('#' + id).remove();
   // Unregister the stream ID.
   attachedIds = _.without(attachedIds, id);
+  updateWall();
   // If there are no streams left, restore the default element.
-  if (attachedIds.length < 1 && $default) {
+  if (attachedIds.length < 1) {
     $default.removeClass('collapsed');
   }
 }
