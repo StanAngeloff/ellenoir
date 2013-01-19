@@ -1,0 +1,37 @@
+" Local Vim configuration file. You need to load it manually:
+"
+" :source %
+
+" The JSHint command-line to lint a JavaScript file.
+let s:jshint_command = "./node_modules/jshint/bin/hint --extra-ext=')|(ellenoir'"
+
+" The Vimux sequence of characters used to reset the terminal before executing a command.
+"
+" q   / Exit any running applications
+" C-c / Terminate any running applications
+" C-u / Drop any command typed so far by the User
+" C-l / Start on a blank screen
+"
+" See https://github.com/benmills/vimux
+let VimuxResetSequence = "q C-c C-u C-l"
+
+function! s:OnJavaScriptFileSaved(file)
+  let command = ''
+  let command = (command . ' ( cd ' . getcwd())
+  let command = (command . ' && ' . s:jshint_command . ' ' . a:file)
+  " NOTE: Add any follow ups once JSHint has successfully linted the file below.
+  let command = (command . ' )')
+  call VimuxRunCommand(command)
+endfunction
+
+" Lint and run JavaScript files on save.
+augroup onJavaScriptFileSaved
+  au!
+  au BufWritePost *.js,ellenoir call s:OnJavaScriptFileSaved(expand('%:p'))
+augroup END
+
+" Reload this file on save.
+augroup reloadLocalConfiguration
+  au!
+  au BufWritePost .lvimrc source %
+augroup END

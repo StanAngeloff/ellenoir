@@ -1,0 +1,59 @@
+#!/usr/bin/env node
+/*jshint node: true */
+
+'use strict';
+
+var fs = require('fs'),
+    https = require('https'),
+    path = require('path');
+
+/**
+ * Get the absolute path to a server certificate file in its default location.
+ *
+ * @param String file
+ * @return String The absolute path.
+ */
+function getCertificateFile(file)
+{
+  return path.resolve(__dirname + '/../app/certificates/' + file);
+}
+
+// Set up command-line options, see https://github.com/substack/node-optimist
+var options = require('optimist')
+  .usage('Usage:\n  $0 [...options]')
+  .wrap(78)
+  .option('listen', { alias: 'l', 'default': '0.0.0.0', demand: true, describe: 'Used to specify the IP address on which to bind and accept incoming connections.' })
+  .option('port', { alias: 'p', 'default': 3030, demand: true, describe: 'Used to specify the port number on which to listen for incoming connections.' })
+  .option('key-file', { 'default': getCertificateFile('server.key'), demand: true, describe: 'The absolute path to the HTTPS server key file (must be passphraseless).' })
+  .option('cert-file', { 'default': getCertificateFile('server.crt'), demand: true, describe: 'The absolute path to the HTTPS server certificate file.' })
+  .option('help', { alias: 'h', describe: 'Print command usage and options.' })
+;
+var argv = options.argv;
+
+// If '-h'elp was requested, print usage and options.
+if (argv.help) {
+  console.log(options.help());
+  process.exit(0);
+}
+
+var express = require('express'),
+    ellenoir = require('../app/express/ellenoir');
+
+// Create the default Express application and HTTPS server.
+var app = express(),
+    server = https.createServer({
+      key: fs.readFileSync(argv['key-file']),
+      cert: fs.readFileSync(argv['cert-file'])
+    }, app);
+
+// Configure Ellenoir against Express and the server instance.
+ellenoir.configure({
+  app: app,
+  server: server
+});
+
+server.listen(argv.port, argv.listen);
+console.log('%s is listening on %s:%d... Press <Ctrl-C> to quit.', argv.$0, argv.listen, argv.port);
+
+
+// vim: ts=2 sw=2 noet ft=javascript

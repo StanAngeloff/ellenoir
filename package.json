@@ -1,0 +1,43 @@
+{
+  "name": "ellenoir",
+  "version": "0.1.0",
+  "license": "AGPLv3",
+  "description": "A communication and management tool for remote offices. Video wall, time management, attendance records, etc.",
+  "homepage": "http://www.psp-group.co.uk",
+  "author": "PSP UK Group Ltd. <hello@psp-group.co.uk>",
+  "contributors": [
+    { "name": "Stan Angeloff", "email": "stanimir@psp-webtech.co.uk", "url": "http://blog.angeloff.name" }
+  ],
+  "keywords": [
+    "attendance",
+    "communication",
+    "management",
+    "office",
+    "remote",
+    "video",
+    "wall"
+  ],
+  "bin": {
+    "ellenoir": "bin/ellenoir"
+  },
+  "main": "app/express/ellenoir.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/StanAngeloff/ellenoir.git"
+  },
+  "dependencies": {
+    "express": "~3.0",
+    "optimist": "~0.3",
+    "webrtc.io": "~0.0",
+    "webrtc.io-client": "~0.0",
+    "ws": "~0.4"
+  },
+  "devDependencies": {
+    "jshint": "~0.9",
+    "supervisor": "~0.5"
+  },
+  "engines": {
+    "node": "~0.8.0",
+    "npm": "~1.2"
+  }
+}
