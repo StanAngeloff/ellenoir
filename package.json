@@ -29,7 +29,6 @@
     "express": "~3.0",
     "optimist": "~0.3",
     "webrtc.io": "~0.0",
-    "webrtc.io-client": "~0.0",
     "ws": "~0.4"
   },
   "devDependencies": {

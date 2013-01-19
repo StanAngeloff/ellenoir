@@ -70,9 +70,6 @@
     "webrtc.io": {
       "version": "0.0.3"
     },
-    "webrtc.io-client": {
-      "version": "0.0.2-3"
-    },
     "ws": {
       "version": "0.4.25",
       "dependencies": {
