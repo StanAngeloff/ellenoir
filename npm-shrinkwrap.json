@@ -2,6 +2,9 @@
   "name": "ellenoir",
   "version": "0.1.0",
   "dependencies": {
+    "consolidate": {
+      "version": "0.7.0"
+    },
     "express": {
       "version": "3.0.6",
       "dependencies": {
@@ -56,6 +59,14 @@
         },
         "debug": {
           "version": "0.7.0"
+        }
+      }
+    },
+    "handlebars": {
+      "version": "1.0.8",
+      "dependencies": {
+        "uglify-js": {
+          "version": "1.2.6"
         }
       }
     },

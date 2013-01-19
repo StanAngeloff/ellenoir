@@ -1,7 +1,7 @@
 /*jshint browser: true */
 /*global console */
 
-// Create a global Ellenoir application that is shared by modules.
+// Create a global Ellenoir application that is shared by other modules.
 this.ellenoir = {};
 
 (function() {
