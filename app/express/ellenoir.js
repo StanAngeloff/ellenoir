@@ -33,6 +33,11 @@ function registerModulesPath(absolutePath) {
       }
     }
 
+    // Each module has implicit dependency on Ellenoir itself.
+    if (moduleDefinition.name !== 'ellenoir' && moduleDefinition.depends.indexOf('ellenoir') < 0) {
+      moduleDefinition.depends.unshift('ellenoir');
+    }
+
     modules.push(moduleDefinition);
   });
 }
