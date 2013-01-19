@@ -1,1 +1,5 @@
-node_modules/
+# Ignore module-specific dependencies.
+app/modules/*/node_modules/
+# Ignore project dependencies, except the Ellenoir main file.
+/node_modules/*
+!/node_modules/ellenoir.js

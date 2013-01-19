@@ -37,7 +37,7 @@ if (argv.help) {
 }
 
 var express = require('express'),
-    ellenoir = require('../app/express/ellenoir');
+    ellenoir = require('ellenoir');
 
 // Create the default Express application and HTTPS server.
 var app = express(),
