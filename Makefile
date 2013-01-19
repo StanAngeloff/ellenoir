@@ -1,5 +1,5 @@
 # The directory/basename of the Node.js server certificate files.
-SERVER_CERT_FILE    := app/certificates/server
+SERVER_CERT_FILE    := app/config/certs/server
 
 SERVER_CERT_COUNTRY := UK
 SERVER_CERT_COUNTY  := Oxfordshire

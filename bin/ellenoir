@@ -15,7 +15,7 @@ var fs = require('fs'),
  */
 function getCertificateFile(file)
 {
-  return path.resolve(__dirname + '/../app/certificates/' + file);
+  return path.resolve(__dirname + '/../app/config/certs/' + file);
 }
 
 // Set up command-line options, see https://github.com/substack/node-optimist
