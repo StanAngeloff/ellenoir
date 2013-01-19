@@ -1,5 +1,5 @@
 /*jshint browser: true */
-/*global console */
+/*global $, console */
 
 // Create a global Ellenoir application that is shared by other modules.
 this.ellenoir = {};
@@ -10,6 +10,20 @@ this.ellenoir = {};
 // The default application options.
 this.options = {
   room: 'default'
+};
+
+var widgets = {};
+/**
+ * Get the widget element belonging to a module.
+ *
+ * @return HTMLElement
+ */
+this.$widget = function(module) {
+  if (module in widgets) {
+    return widgets[module];
+  }
+  widgets[module] = $('#widget-' + module);
+  return widgets[module];
 };
 
 /**
