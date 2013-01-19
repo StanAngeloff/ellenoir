@@ -149,20 +149,19 @@ function getModulesWebFiles(extension) {
       return true;
     }
     fs.readdirSync(module.webPath).forEach(function(file) {
-      if (path.extname(file) === extension) {
-        files.push(module.webUrl + file);
+      var filePath = path.join(module.webPath, file);
+      if (filePath.indexOf(extension) === filePath.length - extension.length) {
+        files.push({
+          module: module.name,
+          file: file,
+          url: (module.webUrl + file),
+          path: filePath,
+          contents: fs.readFileSync(filePath, 'utf8')
+        });
       }
     });
   });
   return files;
-}
-
-function getModulesWebStyles() {
-  return getModulesWebFiles('.less');
-}
-
-function getModulesWebScripts() {
-  return getModulesWebFiles('.js');
 }
 
 exports.configure = function(options) {
@@ -182,8 +181,9 @@ exports.configure = function(options) {
 
   app.get('/', function(request, response) {
     response.render('index.html.hbs', {
-      styles: getModulesWebStyles(),
-      scripts: getModulesWebScripts()
+      styles: getModulesWebFiles('.less'),
+      scripts: getModulesWebFiles('.js'),
+      widgets: getModulesWebFiles('.widget.html')
     });
   });
 };

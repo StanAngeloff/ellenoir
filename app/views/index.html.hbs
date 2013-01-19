@@ -16,7 +16,7 @@
      ============= -->
 
 {{#each styles}}
-    <link rel=stylesheet/less type=text/css href="{{this}}">
+    <link rel=stylesheet/less type=text/css href="{{url}}">
 {{/each}}
 
     <!-- Less.js 1.3.3 --><script src=//cdnjs.cloudflare.com/ajax/libs/less.js/1.3.3/less.min.js></script>
@@ -24,6 +24,13 @@
 </head>
 <body>
 
+  {{#each widgets}}
+    <article id="widget-{{module}}" class=ellenoir-widget data-module="{{module}}">
+
+      {{{ contents }}}
+
+    </article>
+  {{/each}}
 <!-- Dependencies from various CDNs
      ============================== -->
 
@@ -35,7 +42,7 @@
      ============= -->
 
 {{#each scripts}}
-    <script src="{{this}}"></script>
+    <script src="{{url}}"></script>
 {{/each}}
 
 </body>

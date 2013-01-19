@@ -2,8 +2,27 @@
 
 @base-font-family: 'PT Sans', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', tahoma, verdana, arial, sans-serif;
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body,
 input, button, select, textarea,
 .navbar-search .search-query {
   font-family: @base-font-family;
+}
+
+.ellenoir-widget {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+}
+
+.collapsed {
+  display: none;
+  visibility: hidden;
 }
