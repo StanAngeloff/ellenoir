@@ -1,1 +1,1 @@
-{ "depends": ["ellenoir", "webrtc.io"] }
+{ "depends": ["ellenoir", "webrtc.io-client"] }
